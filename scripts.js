@@ -5,15 +5,16 @@ $('#search_button').click(function(){
   var searchvar = document.getElementById("search_field").value;
   
   if (searchvar != ""){
+      $("body").css("justify-content", "flex-start");
   $.getJSON('https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + searchvar +
           '&format=json&origin=*', function(data) {
   
   var pagedata = data['query']['pages'];
   for (var key in pagedata) {
     var item = pagedata[key];
-    
+    console.log(item);
     if (item.thumbnail != 'undefined' && item.thumbnail != null){
-        console.log(item.thumbnail);
+        
         var imgThumbnail = " <img src=" + item.thumbnail.source 
         + " height=" + item.thumbnail.height + 
           " weight=" + item.thumbnail.weight + ">"
